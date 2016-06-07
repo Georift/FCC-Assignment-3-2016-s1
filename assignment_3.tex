@@ -232,6 +232,40 @@
 
     \begin{quoting}
 
+        DES and RSA take two fundamentally approaches when it comes to trying
+        to encrypt a given message. Both have their advantages and
+        disadvantages in different situations. \\
+
+        DES is a block cipher, meaning it will accept blocks of plain text and
+        output a block of cipher text. DES takes in 64 bit blocks and outputs
+        an equivalent 64 bit block of cipher text. A typical key is also 64
+        bits in size however only 56 bits of that is the actual key with 8
+        being reserved for parity. This key is used on both the encryption and
+        decryption process meaning DES is a symmetric encryption algorithm.
+        During the encryption process the algorithm will perform 16 rounds of
+        the Feistel function. The Feistel function accepts a half block and a
+        subkey. The subkey is generated specifically for that round of the
+        function. With these two it will perform a couple operations, an
+        expansion, XOR, substitution and finally permutation.  All of these
+        operations are rudimentary thus making DES a very fast encryption
+        algorithm. \\
+
+        RSA on the other hand is an asymmetric encryption algorithm meaning the
+        keys used for encryption and decryption are different. To do this a
+        key pair must be generated. A key pair is required for each party
+        wishing to communicate and contains a public and a private key. The
+        public key can be shared with the world while the private key must
+        remain a secret. To send encrypt a message to someone you must encrypt
+        the message you wish to send with the persons public key. The encrypted
+        message can only be decrypted by the corresponding private key. The
+        encryption algorithm use modular exponentiation of messages/keys in
+        numeric form. These calculations can end up being very large with a
+        typical key size today being 2048 bit. The calculations can be broken
+        down into smaller pieces using modular arithmetic but the result of
+        this is a very slow algorithm. The size of the message we can encrypt
+        is at most the size of the key pair used. \\
+        
+
     \end{quoting}
 
 \end{homeworkProblem}
