@@ -472,9 +472,69 @@
     \end{align*}
 
     \begin{quoting}
-        
+        We know that the modular multiaplicative inverse exists if $a$ and $b$
+        are coprime.
+        \begin{equation*}ax\equiv1 \pmod m\end{equation*}
+
+        We know that $q$ is going to be coprime with any number besides
+        itself given it's a prime number. We also know that k is selected
+        randomly such that $0 < k < q$. You can see that $k$ is always less
+        than $q$. As such we know that k and m are always coprime and thus
+        a modular multiplicative inverse exists.
+
+        When we receive a message and wish to verify it's authenticity we have:
+        \begin{equation*}(m', r', s')\end{equation*}
+        The $'$ denotes that we haven't verified it to be true. Where lack of
+        represents the original values.
     \end{quoting}
 
+    \begin{align*}
+        w &= (s')^{-1} \mod q &= s^{-1} \mod q\\
+        u_{1} &= [H(m')w] \mod q &= [H(m)w] \mod q\\
+        u_{2} &= r'w \mod q &= rw \mod q\\
+    \end{align*}
+
+    \begin{quoting}
+        Using Fermat's Little Theroem:
+    \end{quoting}
+    \begin{align*}
+        g^{q} \mod p &= (h^{\frac{(p-1)}{q}} \mod p) \\
+        \shortintertext{given that p is prime}
+                     &= h^{(p-1)} \mod p \\
+                     &= 1
+    \end{align*}
+
+    \begin{quoting}
+        Proof that the component added to the end of the hash can be removed
+        during verification.
+    \end{quoting}
+    \begin{align*}
+        m' &= m + kq \\
+        g^{m'} \mod p &= g^{m + kq} \mod p \\
+                      &= (g^{m}g^{kq}) \mod p \\
+                      &= (g^{m}(g^{q} \mod p)^{k}) \mod p \\
+        \shortintertext{Given the $g^{q} \mod p = 1$}
+                      &= g^{m} \mod p
+    \end{align*}
+    \begin{quoting}
+        To verify the signature is valid we must prove that $v = r'$. Where $v$
+        is calculated using:
+    \end{quoting}
+    \begin{align*}
+        v &=((g^{u_{1}}y^{u_{2}}) \mod p) \mod q \\
+          &=((g^{H(m)w}y^{rw}) \mod p) \mod q \\
+          &=((g^{H(m)w}g^{xrw}) \mod p) \mod q \\
+          &=((g^{H(m)w + xrw}) \mod p) \mod q \\
+        \shortintertext{Using the proof above}
+          &=((g^{(H(m)w + xr)w}) \mod p) \mod q \\
+        \shortintertext{Given:}
+        s &= k^{-1}(H(m) + xr) \mod q \\
+        \shortintertext{By definition of modular multiplicative inverse:}
+        w &= (k(H(m) + xr)^{-1}) \mod q \\
+          &\therefore (H(m) + xr)w = k \mod q\\ \\
+        v &=((g^{(H(m)w + xr)w}) \mod p) \mod q = r\\
+        v &=(g^{k} \mod p) \mod q = r\\
+    \end{align*}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
