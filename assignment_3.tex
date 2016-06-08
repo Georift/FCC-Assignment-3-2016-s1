@@ -289,7 +289,45 @@
         matter of increasing the size of the primes you select. The larger the
         keysize you select the longer you can expect your messages to be
         secure. \\
-        
+
+        When trying to encrypt larger messages with DES we are able to break
+        the message up into smaller 64 bit blocks and encrypt each separately.
+        RSA will encrypt the entire message in one hit and can encrypt messages
+        with a size as large as the keysize. Using the typical keysize of 2048
+        we can in the best case encrypt 256 chars (\textit{This isn't possible
+        given the way a message is structured, padding/random bits.}). These
+        sizes are impractical when encrypting words as we can only really
+        encrypt a paragraph or so. File encryption with RSA is practically out
+        of the question. DES has the advantage of being able to encrypt files
+        of any size. \\
+
+        In public key encryption the public key is know by everyone. Because of
+        this a potential attacker can encrypt messages using the publicly known
+        key they can generate messages that they would expect to see and
+        compare the cipher text they generate with what they are seeing over
+        the network. To combat this we have to generate a random component to
+        the message as well as pad the message out. DES has the advantage over
+        RSA of as the key is only known by the two parties communicating,
+        and because of this attackers cannot generate cipher texts with the
+        key. \\
+
+        Because DES is a symmetric encryption algorithm the same key is
+        required on both sides to communicate. Somehow the two parties need to
+        share the key with each other, often it's not possible to meet up to
+        exchange the key every time we need one, thus we have to transmit it
+        over the network. We must ensure the key is remains a secret, if it is
+        revealed it would be trivial for an attacker to read all communications
+        for the duration of that key. Because of the size of the internet and
+        the shear number of different people we need to communicate with
+        securely we simply cannot have a secure channel for each. RSA on the
+        other hand simply requires a exchange of keys once, the keypair can be
+        used for many years without any major security issue, once a keypair
+        has been used it can be used to sign the new public key proving to
+        everyone you had already shared with that you are still who you say you
+        are. Ignoring \textit{Diffie Hellman} key exchange for the time being
+        we can see that RSA has a massive advantage in terms of key exchange
+        over DES.
+        \\
 
     \end{quoting}
 
