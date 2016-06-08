@@ -326,8 +326,121 @@
         everyone you had already shared with that you are still who you say you
         are. Ignoring \textit{Diffie Hellman} key exchange for the time being
         we can see that RSA has a massive advantage in terms of key exchange
-        over DES.
+        over DES. \\
+    \end{quoting}
+
+    b) List some main difficulties for key management of DES and RSA
+    respectively and give your idea how to solve them. \\
+
+    \begin{quoting}
+
+        \textbf{DES Key Management} \\
+
+        DES requires both parties have the same key before they are able to
+        start communicating. There are a few ways that we can do this reliably
+        even without access to a secure channel. The following two options are
+        not the only options but simply the best without using a third party.
         \\
+
+        The \textit{Diffie Hellman} key exchange protocol is an ingenious way
+        to \textit{generate} a key that can be used between two parties. It
+        requires both parties agree on two numbres, $p$ a prime number and $q$
+        the primative root of $p$. These numbers are transmitted in plain text
+        and are not required to be secret. From this both parties pick a
+        private number less than the shared number $q$, this is their
+        \textit{"private key"}, $X_{A}$. With this randomly selected number
+        they each generate a \textit{"public key"}, $Y_{A}$, using the
+        following formula: $p^{X_{A}} \text{ mod } q = Y_{A}$. Both $A$ and $B$
+        will generate a public and private value and transmit the public one to
+        the other party. With their private key and the other parties public
+        key they can arrive at a common key using this formula: $K =
+        (Y_{A})^{X_{B}} \text{ mod } q = (Y_{B})^{X_{A}} \text{ mod } q$ \\
+
+        While this method is great as it doesn't require any prior sharing of
+        keys before they are able to communicate it has one major flaw. An
+        attacker that is able to intercept and modify messages between A and B
+        could sit between the two and generate two keys using the protocol one
+        for each A and B. Invisible to the original two parties the attacker
+        can pretend to be the other party and relay the messages reading and/or
+        changing anything they would like. To solve this man in the middle
+        attack the two parties need some way of verifiying they are who they
+        say they are. Combining the message signing capiabilities of RSA both
+        parties could sign their public key numbers so each side could
+            verify they are talking to the correct person. \textit{This solves
+                the issue of verifying the other person however it just pushes
+                to problem over to ensuring you have the correct public keys
+            for each person. See discussion on RSA for more solutions.}
+
+        In the previous situation, where we were signing the public keys in the
+        Diffie Hellman key exchange, we would require both parties to have a
+        keypair and know the others public key. At this point we have all of
+        the requirements for RSA encryption and could simply transfer the key
+        that way. While we could still do Diffie Hellman we could cut down on
+        the number of messages required by having one host generate and send
+        the key. This option is preferable because we get have secrecy of the
+        message content as well as message signing to ensure we are talking to
+        the correct person. \\
+
+        \textbf{RSA Key Management} \\
+
+        As discussed in the previous examples we were able to solve the key
+        exchange problem by moving most of the work to RSA. But that doesn't
+        solve the problem of ensuring we have the correct public key for the
+        people we would like to communicate with. This is an issue that is very
+        situation specific and given the large number of new services we are
+        seeing on the internet is a very important topic. \\
+
+        \textbf{HTTPS Example} \\
+
+        Because anyone can generate a keypair and try and pass it off as
+        someone elses we need to make sure with out a doubt that the public key
+        we have is for the correct person. Using HTTPS as an example, both
+        parties are able to get around this problem by using a trusted third
+        party. The third party is called a \textit{Certificate Authority},
+        their job is to sign the public key of the web server stating the
+        correct domain name that it should be used for. This system works great
+        and is the current method for ensuring that when you visit a https
+        website we have the correct key. But for this method to work, we need
+        to know the public key of all of the \textit{Certificate Authorities}
+        and trust that the public key we have is the correct one for them. To
+        get around this most browsers come preinstalled with a list of
+        certified \textit{CA's} public keys. \\
+        
+        You will notice, if the website is using HTTPS without getting their
+        public key signed by a recognized \textit{CA's} the browser will show a
+        warning telling you the site you are connecting to is not
+        \textit{"secure"}. What the browser really means is the public key
+        cannot be verified and if you do infact have the correct public key your
+        connection will be properly secure. \\
+
+        \textbf{PGP/Email Encryption Example} \\
+
+        Another situation where RSA can be used is for encrypting emails, a
+        software package you can use for this is called PGP. When using PGP the
+        encryption process if far more visibile to the user, as a result users
+        will generally take a more hands on approch when trying to ensure that
+        they public key they have is correct for the person they want to talk
+        to. In the PGP community there are a couple ways the public keys are
+        verified without the need for a third party authority to decide who's
+        keys are valid. \\
+
+        Meeting the person you wish to communicate with and exchanging public
+        keys is the only way to be completely confident that the key you have
+        is correct. Once you have met the person and exchanged keys, even later
+        down the line if they need to change their keys you can be sure the new
+        keys still belong to them if they sign their new public key with their
+        old private key. Because it's not reasonable to meet up with every
+        person you ever need to communicate with, it's common to use what is
+        called a network of trust. What this means is that when you exchange
+        public keys with someone in person you can sign their key stating that
+        you trust that it is valid for that person. As more and more people
+        sign each others public keys a network will build up. What this allows
+        you to do is get the public key from a person you've never met
+        \textit{reasonable} confidence assuming you have met someone who has
+        signed their public key. This idea really starts to show the social
+        aspect of cryptography and how really at the end of the day it's all
+        one massive trust game.
+
 
     \end{quoting}
 
