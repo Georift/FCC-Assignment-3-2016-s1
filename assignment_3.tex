@@ -264,6 +264,31 @@
         down into smaller pieces using modular arithmetic but the result of
         this is a very slow algorithm. The size of the message we can encrypt
         is at most the size of the key pair used. \\
+
+        When comparing the two algorithms it's very clear to see the key size
+        between the two is significantly different. DES only uses 56 bits
+        compared to RSA which \textit{generally} uses 2048 bit. Obviously the
+        larger the keysize the better in terms of how cryptographically secure
+        the algorithm is. Currently it is considered impossible to crack RSA
+        encryption using a keysize of 2048 bit using the computing power
+        available however it's relatively trivial to crack a 56 bit DES
+        encryption. Today DES is used in a form called triple DES where the
+        plain text is encrypted three times with different keys each time, this
+        is considered to be reasonably secure today. RSA has the obvious
+        advantage over DES when it comes to the cryptographic security of the
+        encrypted messages. \\
+        
+        As technology and techniques for breaking keys improves keysizes will
+        eventually become insecure. Considering the abundance of cheap hard
+        drive space today it's not expensive for an attacker to simply save
+        your encrypted messages today and either spend a long time cracking the
+        key (3DES) or wait for technology to reach a stage where that keysize
+        is no longer secure (RSA). It's easy to conclude that the messages we
+        encrypt today will not be secure forever. One advantage RSA has of
+        DES/3DES is how easy it is to increase the key size, it's simply a
+        matter of increasing the size of the primes you select. The larger the
+        keysize you select the longer you can expect your messages to be
+        secure. \\
         
 
     \end{quoting}
