@@ -440,9 +440,46 @@
         signed their public key. This idea really starts to show the social
         aspect of cryptography and how really at the end of the day it's all
         one massive trust game.
+    \end{quoting}
 
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+    In page 36 of lecture 9, Please prove the verification stage for DSS. Make sure
+    that you understand each step in your proof with detail comments for
+    justification. For example, justify why $k^{-1} \text{ mod } q$ exists.
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+    Consider a Diffie-Hillman scheme with a common prime q=13 and a primitive
+root 7. \\
+
+    a) If Alice has a public $X_{A} = 9$, what is Alice's private key? \\
+
+    \begin{quoting}
+        Because the numbers we have been given a quite small we can calculate
+        Alice's private key but trying the integers from 0 to 12.
+        \begin{align*}
+            7^{0} \text{ mod } 13 &= 1 \\
+            7^{1} \text{ mod } 13 &= 7 \\
+            7^{2} \text{ mod } 13 &= 10 \\
+            7^{3} \text{ mod } 13 &= 5 \\
+            7^{4} \text{ mod } 13 &= 9
+        \end{align*}
+
+        We have found Alice's private key to be $X_{A} = 4$. \\
 
     \end{quoting}
+
+    b) If Bob has a public key $X_{B} = 12$, please compute the common secret key $K$
+shared with Alice. \\
+    \begin{align*}
+        K = (Y_{B})^{X_{A}} \text{ mod } 13 = 12^{4} \text{ mod } 13 = 1 \\
+        \shortintertext{The key shared between A and B is 1.}
+    \end{align*}
 
 \end{homeworkProblem}
 
