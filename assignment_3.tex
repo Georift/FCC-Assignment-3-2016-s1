@@ -232,8 +232,8 @@
 
     \begin{quoting}
 
-        DES and RSA take two fundamentally approaches when it comes to trying
-        to encrypt a given message. Both have their advantages and
+        DES and RSA take two fundamentally different approaches when it comes
+        to trying to encrypt a given message. Both have their advantages and
         disadvantages in different situations. \\
 
         DES is a block cipher, meaning it will accept blocks of plain text and
@@ -251,14 +251,14 @@
         algorithm. \\
 
         RSA on the other hand is an asymmetric encryption algorithm meaning the
-        keys used for encryption and decryption are different. To do this a
-        key pair must be generated. A key pair is required for each party
-        wishing to communicate and contains a public and a private key. The
-        public key can be shared with the world while the private key must
-        remain a secret. To send encrypt a message to someone you must encrypt
-        the message you wish to send with the persons public key. The encrypted
-        message can only be decrypted by the corresponding private key. The
-        encryption algorithm use modular exponentiation of messages/keys in
+        keys used for encryption and decryption are different. To do this a key
+        pair must be generated, a key pair is required for each party wishing
+        to communicate and contains a public and a private key. The public key
+        can be shared with the world while the private key must remain a
+        secret. To send encrypt a message to someone you must encrypt the
+        message you wish to send with the persons public key. The encrypted
+        message can only be decrypted by it's corresponding private key. The
+        encryption algorithm uses modular exponentiation of messages/keys in
         numeric form. These calculations can end up being very large with a
         typical key size today being 2048 bit. The calculations can be broken
         down into smaller pieces using modular arithmetic but the result of
@@ -269,26 +269,26 @@
         between the two is significantly different. DES only uses 56 bits
         compared to RSA which \textit{generally} uses 2048 bit. Obviously the
         larger the keysize the better in terms of how cryptographically secure
-        the algorithm is. Currently it is considered impossible to crack RSA
+        an algorithm is. Currently it is considered impossible to crack RSA
         encryption using a keysize of 2048 bit using the computing power
-        available however it's relatively trivial to crack a 56 bit DES
+        available today. However it's relatively trivial to crack a 56 bit DES
         encryption. Today DES is used in a form called triple DES where the
         plain text is encrypted three times with different keys each time, this
-        is considered to be reasonably secure today. RSA has the obvious
-        advantage over DES when it comes to the cryptographic security of the
-        encrypted messages. \\
+        is considered to be reasonably secure by todays standard. RSA has the
+        obvious advantage over DES when it comes to the cryptographic security
+        of the encrypted messages. \\
         
-        As technology and techniques for breaking keys improves keysizes will
-        eventually become insecure. Considering the abundance of cheap hard
-        drive space today it's not expensive for an attacker to simply save
-        your encrypted messages today and either spend a long time cracking the
-        key (3DES) or wait for technology to reach a stage where that keysize
-        is no longer secure (RSA). It's easy to conclude that the messages we
-        encrypt today will not be secure forever. One advantage RSA has of
-        DES/3DES is how easy it is to increase the key size, it's simply a
-        matter of increasing the size of the primes you select. The larger the
-        keysize you select the longer you can expect your messages to be
-        secure. \\
+        As technology and techniques for breaking keys improves current
+        keysizes will eventually become insecure. Considering the abundance of
+        cheap hard drive space today it's not expensive for an attacker to
+        simply save your encrypted messages today and either spend a long time
+        cracking the key (3DES) or wait for technology to reach a stage where
+        that keysize is no longer secure (RSA). It's easy to conclude that the
+        messages we encrypt today will not be secure forever. One advantage RSA
+        has over DES/3DES is how easy it is to increase the key size, it's
+        simply a matter of increasing the size of the prime numbers you select.
+        The larger the keysize you select the longer you can expect your
+        messages to be secure. \\
 
         When trying to encrypt larger messages with DES we are able to break
         the message up into smaller 64 bit blocks and encrypt each separately.
@@ -307,15 +307,21 @@
         compare the cipher text they generate with what they are seeing over
         the network. To combat this we have to generate a random component to
         the message as well as pad the message out. DES has the advantage over
-        RSA of as the key is only known by the two parties communicating,
-        and because of this attackers cannot generate cipher texts with the
-        key. \\
+        RSA that key is only known by the two parties communicating, and
+        because of this attackers cannot generate cipher texts with the key. \\
+
+        A significant disadvantage of DES is unknown nature of the S-Box's
+        provided by the NSA. Because no papers have ever been released on how
+        they were designed, there is not way to be certain that the S-Box's do
+        not have a purposely introduce vulnerability. Thankfully with RSA we
+        are able to mathematically see that the encryption algorithm is hard to
+        break. \\
 
         Because DES is a symmetric encryption algorithm the same key is
         required on both sides to communicate. Somehow the two parties need to
         share the key with each other, often it's not possible to meet up to
         exchange the key every time we need one, thus we have to transmit it
-        over the network. We must ensure the key is remains a secret, if it is
+        over the network. We must ensure the key remains a secret, if it is
         revealed it would be trivial for an attacker to read all communications
         for the duration of that key. Because of the size of the internet and
         the shear number of different people we need to communicate with
@@ -327,6 +333,14 @@
         are. Ignoring \textit{Diffie Hellman} key exchange for the time being
         we can see that RSA has a massive advantage in terms of key exchange
         over DES. \\
+
+        By combining both RSA and DES we are able to get the best of both
+        worlds. By transmitting the key with RSA we know the message will only
+        be visible to the public key we encrypt it for. On the other side the
+        other party knows that we sent it as we are able to digitally sign our
+        message. \textit{Dicussion on the sharing/verification of public keys
+        follows in the next part.} \\
+
     \end{quoting}
 
     b) List some main difficulties for key management of DES and RSA
